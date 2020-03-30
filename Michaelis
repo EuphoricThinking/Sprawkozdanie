@@ -1,0 +1,21 @@
+import matplotlib.pyplot as plt
+from scipy.interpolate import interp1d
+
+v0 = [0, 4, 9, 16, 25] #Wpisz kolejno wartości prędkości początkowych; przecinki zamień na kropki, wartości wypisz po przecinku
+s = [0,2,3,4,5] #Wpisz wartośći stężeń w sposób podany wyżej
+
+inter = interp1d(s, v0, fill_value='extrapolate') #Liniowo interpoluje funkcję ze stężeniami jako arg, v0 jako wartościami
+yinter = interp1d(v0, s, fill_value='extrapolate') #Dla danej prędkości wyznacza stężenie; wyznacza x dla danego y
+vmax = inter(s)[-1] #Największą wartość prędkości uznaje za wartość maksymalną
+pol = vmax/2 #Połowa wartości prędkości maksymalnej
+km = yinter(pol) #Wartość stężenia, dla którego reakcja osiąga połowę maksymalnej prędkości - stała Km
+print('Stała Km = ', km) #Wyświetla km
+print('Połowa vmax = ', pol)
+print('vmax = ', vmax)
+
+plt.figure()
+plt.plot(inter(s))
+plt.xlabel('Stężenie')
+plt.ylabel('Prędkość')
+plt.savefig('sprawo.png') #Zapisuje obraz
+plt.show() #Dla pewności możesz porównać wykres, czy prawidłowo przedstawia się
