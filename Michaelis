@@ -1,9 +1,8 @@
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp1d
 
-v0 = [0, 4, 9, 16, 25] #Wpisz kolejno wartości prędkości początkowych; przecinki zamień na kropki, wartości wypisz po przecinku
-s = [0,2,3,4,5] #Wpisz wartośći stężeń w sposób podany wyżej
-
+v0 = list(map(float, input("Wpisz wartości prędkości początkowych oddzielone spacją; zastosuj kropkę zamiast przecinka w przypadku części dziesiętnych\n").split()))
+s = list(map(float, input("Wpisz wartości stężeń w sposób podany wyżej\n").split()))
 inter = interp1d(s, v0, fill_value='extrapolate') #Liniowo interpoluje funkcję ze stężeniami jako arg, v0 jako wartościami
 yinter = interp1d(v0, s, fill_value='extrapolate') #Dla danej prędkości wyznacza stężenie; wyznacza x dla danego y
 vmax = inter(s)[-1] #Największą wartość prędkości uznaje za wartość maksymalną
